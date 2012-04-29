@@ -1,8 +1,7 @@
-
-Name:       libXext
+Name:       libxext
 Summary:    X.Org X11 libXext runtime library
 Version:    1.2.0
-Release:    1
+Release:    2.4
 Group:      System/Libraries
 License:    MIT
 URL:        http://www.x.org/
@@ -35,9 +34,8 @@ Description: %{summary}
 
 
 %build
-
-%reconfigure \
-	LDFLAGS="-Wl,--hash-style=both -Wl,--as-needed"
+export LDFLAGS+=" -Wl,--hash-style=both -Wl,--as-needed"
+%reconfigure 
 
 # Call make instruction with smp support
 make %{?jobs:-j%jobs}
@@ -71,5 +69,5 @@ rm -rf %{buildroot}
 %{_libdir}/libXext.so
 %{_libdir}/pkgconfig/xext.pc
 %doc %{_mandir}/man3/*.3*
-%doc %{_docdir}/%{name}
+%doc %{_docdir}/libXext/*
 
