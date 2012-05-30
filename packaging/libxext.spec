@@ -6,6 +6,7 @@ Group:      System/Libraries
 License:    MIT
 URL:        http://www.x.org/
 Source0:    http://cgit.freedesktop.org/xorg/lib/libXext/snapshot/%{name}-%{version}.tar.gz
+Source1001: packaging/libxext.manifest 
 Requires(post):  /sbin/ldconfig
 Requires(postun):  /sbin/ldconfig
 BuildRequires:  pkgconfig(xorg-macros)
@@ -34,6 +35,7 @@ Description: %{summary}
 
 
 %build
+cp %{SOURCE1001} .
 export LDFLAGS+=" -Wl,--hash-style=both -Wl,--as-needed"
 %reconfigure 
 
@@ -57,6 +59,7 @@ rm -rf %{buildroot}
 
 
 %files
+%manifest libxext.manifest
 %defattr(-,root,root,-)
 %doc AUTHORS COPYING
 %{_libdir}/libXext.so.6
@@ -64,6 +67,7 @@ rm -rf %{buildroot}
 
 
 %files devel
+%manifest libxext.manifest
 %defattr(-,root,root,-)
 %{_includedir}/X11/extensions/*.h
 %{_libdir}/libXext.so
