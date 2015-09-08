@@ -22,7 +22,7 @@ X.Org X11 libXext runtime library
 %package devel
 Summary: X.Org X11 libXext development package
 Group: Development/Libraries
-Provides: libxext-devel 
+Provides: libxext-devel
 Requires: %{name} = %{version}-%{release}
 Requires: libX11-devel
 Requires: pkgconfig(xorg-macros)
@@ -40,7 +40,8 @@ make %{?jobs:-j%jobs}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-
+mkdir -p %{buildroot}/usr/share/license
+cp -af COPYING %{buildroot}/usr/share/license/%{name}
 make install DESTDIR=$RPM_BUILD_ROOT
 
 # We intentionally don't ship *.la files
@@ -59,7 +60,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%doc AUTHORS COPYING
+/usr/share/license/%{name}
+#%doc AUTHORS COPYING
 %{_libdir}/libXext.so.6
 %{_libdir}/libXext.so.6.4.0
 
